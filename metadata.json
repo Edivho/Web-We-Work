@@ -1,0 +1,6 @@
+{
+  "name": "Open Office Space Indonesia",
+  "description": "Platform penghubung coffee shop dan ruang komersial dengan remote worker serta pelaku UMKM di Indonesia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
