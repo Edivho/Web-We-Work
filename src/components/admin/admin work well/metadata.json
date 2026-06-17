@@ -1,0 +1,6 @@
+{
+  "name": "Open Office Space",
+  "description": "An administrative dashboard for the Open Office Space workspace marketplace to monitor bookings, partners, workspaces, revenue splits, and sign-ups.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

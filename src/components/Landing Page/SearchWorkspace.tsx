@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Search, MapPin, Users, Sparkles, SlidersHorizontal, RefreshCw, Star, ArrowUpRight } from 'lucide-react';
-import { Workspace } from '../types';
-import { WORKSPACES } from '../data';
+import { Workspace } from '../../types';
+import { WORKSPACES } from '../../data';
 
 interface SearchWorkspaceProps {
   onSelectWorkspace: (workspace: Workspace) => void;

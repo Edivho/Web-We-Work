@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Calendar, Clock, MapPin, Users, Check, AlertCircle } from 'lucide-react';
-import { EVENTS } from '../data';
-import { CommunityEvent } from '../types';
+import { EVENTS } from '../../data';
+import { CommunityEvent } from '../../types';
 
 export default function KomunitasNetworking() {
   const [registeredEvents, setRegisteredEvents] = useState<string[]>([]);

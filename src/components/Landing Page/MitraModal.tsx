@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Building2, User, Mail, Phone, MapPin, Layers, Coffee, Send, ChevronRight, Sparkles } from 'lucide-react';
-import { PartnerRegistration } from '../types';
+import { PartnerRegistration } from '../../types';
 
 interface MitraModalProps {
   isOpen: boolean;

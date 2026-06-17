@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Landmark, Compass, HelpCircle, Briefcase, Users, Handshake } from 'lucide-react';
+import { Menu, X, Compass, HelpCircle, Briefcase, Users, Handshake } from 'lucide-react';
 
 interface NavbarProps {
   onOpenMitra: () => void;
@@ -49,17 +49,22 @@ export default function Navbar({ onOpenMitra, onScrollToSearch }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Brand / Branding */}
+          
+          {/* Logo Brand / Branding - WORK WELL */}
           <div
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-xl bg-coffee-brown flex items-center justify-center shadow-md shadow-coffee-brown/25 group-hover:scale-105 transition-transform">
-              <Landmark className="w-5.5 h-5.5 text-white" />
-            </div>
+            {/* Menggunakan file logo.png dari folder public */}
+            <img 
+              src="/logo.png" 
+              alt="Work Well Logo" 
+              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
+            />
             <div>
+              {/* Nama aplikasi diubah menjadi Work Well */}
               <div className="font-display font-extrabold text-lg text-dark-gray leading-none flex items-center gap-1">
-                We <span className="text-coffee-brown">Work</span>
+                Work <span className="text-coffee-brown">Well</span>
               </div>
               <span className="text-[9px] uppercase tracking-wider font-mono font-bold text-dark-gray/60 leading-none">
                 Open Office Space

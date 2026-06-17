@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Star, Quote, MessageSquare } from 'lucide-react';
-import { TESTIMONIALS } from '../data';
+import { TESTIMONIALS } from '../../data';
 
 export default function Testimoni() {
   const [activeFilter, setActiveFilter] = useState<'All' | 'User' | 'Mitra'>('All');

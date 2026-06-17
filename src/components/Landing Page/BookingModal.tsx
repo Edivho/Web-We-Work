@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, User, Mail, Phone, ShieldCheck, CheckCircle2, Ticket, QrCode } from 'lucide-react';
-import { Workspace, Booking } from '../types';
+import { Workspace, Booking } from '../../types';
 
 interface BookingModalProps {
   workspace: Workspace | null;
@@ -27,10 +27,27 @@ export default function BookingModal({ workspace, onClose, onBookingSuccess }: B
   const rawTotal = PRICE_PER_HOUR * duration;
   const grandTotal = rawTotal + SERVICE_FEE;
 
+  // Simulasi daftar tanggal yang sudah penuh/tidak tersedia
+  const unavailableDates = ['2026-06-20', '2026-06-25', '2026-06-28'];
+  const isDateUnavailable = unavailableDates.includes(bookingDate);
+
+  // Mendapatkan tanggal hari ini berdasarkan zona waktu lokal (WIB)
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userName || !userEmail || !userPhone || !bookingDate) {
       alert('Mohon lengkapi semua data formulir.');
+      return;
+    }
+
+    // Proteksi ganda jika user memanipulasi elemen via DevTools
+    if (bookingDate < todayStr || isDateUnavailable) {
+      alert('Tanggal yang Anda pilih tidak tersedia untuk dipesan.');
       return;
     }
 
@@ -64,8 +81,6 @@ export default function BookingModal({ workspace, onClose, onBookingSuccess }: B
   const handlePrint = () => {
     window.print();
   };
-
-  const todayStr = new Date().toISOString().split('T')[0];
 
   return (
     <div id="booking-modal-overlay" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-charcoal/70 backdrop-blur-sm">
@@ -129,8 +144,19 @@ export default function BookingModal({ workspace, onClose, onBookingSuccess }: B
                     value={bookingDate}
                     onChange={(e) => setBookingDate(e.target.value)}
                     required
-                    className="w-full text-sm px-3 py-2 border border-warm-beige/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-coffee-brown/40 focus:border-coffee-brown bg-white"
+                    className={`w-full text-sm px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-coffee-brown/40 bg-white transition-all ${
+                      isDateUnavailable 
+                        ? 'border-gray-300 text-gray-400 bg-gray-50 select-none' 
+                        : !bookingDate 
+                          ? 'border-warm-beige/80 text-dark-gray/40' 
+                          : 'border-warm-beige/80 text-dark-gray font-medium focus:border-coffee-brown'
+                    }`}
                   />
+                  {isDateUnavailable && (
+                    <p className="text-[11px] text-gray-500 mt-1 font-medium flex items-center gap-1 animate-pulse">
+                      ⚠️ Tanggal pilihan Anda sudah penuh (Non-Available)
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-dark-gray/80 mb-1 flex items-center gap-1">
@@ -294,8 +320,12 @@ export default function BookingModal({ workspace, onClose, onBookingSuccess }: B
               <button
                 id="btn-submit-booking-form"
                 onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="px-5 py-2.5 bg-coffee-brown hover:bg-coffee-dark text-white rounded-lg font-semibold shadow transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                disabled={isSubmitting || isDateUnavailable}
+                className={`px-5 py-2.5 text-white rounded-lg font-semibold shadow transition-all flex items-center justify-center gap-2 text-xs ${
+                  isDateUnavailable
+                    ? 'bg-gray-400 text-gray-200 cursor-not-allowed opacity-80'
+                    : 'bg-coffee-brown hover:bg-coffee-dark cursor-pointer disabled:opacity-50'
+                }`}
               >
                 {isSubmitting ? (
                   <>
@@ -305,6 +335,8 @@ export default function BookingModal({ workspace, onClose, onBookingSuccess }: B
                     </svg>
                     Mencadangkan...
                   </>
+                ) : isDateUnavailable ? (
+                  'Tanggal Tidak Tersedia'
                 ) : (
                   'Lanjutkan ke Pembayaran'
                 )}
