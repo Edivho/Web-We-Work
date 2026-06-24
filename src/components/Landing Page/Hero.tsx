@@ -112,15 +112,7 @@ export default function Hero({ onOpenMitra, onScrollToSearch }: HeroProps) {
               />
               
               {/* Overlay Glass Badge 1 */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white max-w-[170px] shadow-lg flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-sm">
-                  100%
-                </div>
-                <div className="text-[10px]">
-                  <p className="font-extrabold text-dark-gray">Fokus Tinggi</p>
-                  <p className="text-dark-gray/60 leading-tight">WiFi stabil & colokan melimpah</p>
-                </div>
-              </div>
+              
 
               {/* Overlay Glass Badge 2 */}
               <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white shadow-lg text-right">

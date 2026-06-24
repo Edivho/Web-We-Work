@@ -59,9 +59,6 @@ export default function Footer() {
                 <a href="#kemitraan" className="hover:text-coffee-light transition-colors">Program Kemitraan</a>
               </li>
               <li>
-                <a href="#komunitas" className="hover:text-coffee-light transition-colors">Komunitas & Agenda</a>
-              </li>
-              <li>
                 <a href="#faq" className="hover:text-coffee-light transition-colors">Pusat Hub Bantuan</a>
               </li>
             </ul>

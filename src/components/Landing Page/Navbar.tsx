@@ -12,11 +12,7 @@ export default function Navbar({ onOpenMitra, onScrollToSearch }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -26,10 +22,8 @@ export default function Navbar({ onOpenMitra, onScrollToSearch }: NavbarProps) {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // height of navbar
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - offset;
 
       window.scrollTo({
@@ -50,19 +44,13 @@ export default function Navbar({ onOpenMitra, onScrollToSearch }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Brand / Branding - WORK WELL */}
+          {/* Logo Brand */}
           <div
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2 cursor-pointer group"
           >
-            {/* Menggunakan file logo.png dari folder public */}
-            <img 
-              src="/logo.png" 
-              alt="Work Well Logo" 
-              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
-            />
+            <img src="/logo.png" alt="Work Well Logo" className="w-10 h-10 object-contain group-hover:scale-105 transition-transform" />
             <div>
-              {/* Nama aplikasi diubah menjadi Work Well */}
               <div className="font-display font-extrabold text-lg text-dark-gray leading-none flex items-center gap-1">
                 Work <span className="text-coffee-brown">Well</span>
               </div>
@@ -72,140 +60,44 @@ export default function Navbar({ onOpenMitra, onScrollToSearch }: NavbarProps) {
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Komunitas sudah dihapus di sini) */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-dark-gray/80">
-            <button
-              onClick={() => scrollToSection('cara-kerja')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              Cara Kerja
-            </button>
-            <button
-              onClick={() => scrollToSection('cari-workspace')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              Cari Workspace
-            </button>
-            <button
-              onClick={() => scrollToSection('mengapa-memilih')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              Keunggulan
-            </button>
-            <button
-              onClick={() => scrollToSection('kemitraan')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              Peluang Kemitraan
-            </button>
-            <button
-              onClick={() => scrollToSection('komunitas')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              Komunitas
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="hover:text-coffee-brown transition-colors cursor-pointer"
-            >
-              FAQ
-            </button>
+            <button onClick={() => scrollToSection('cara-kerja')} className="hover:text-coffee-brown transition-colors cursor-pointer">Cara Kerja</button>
+            <button onClick={() => scrollToSection('cari-workspace')} className="hover:text-coffee-brown transition-colors cursor-pointer">Cari Workspace</button>
+            <button onClick={() => scrollToSection('mengapa-memilih')} className="hover:text-coffee-brown transition-colors cursor-pointer">Keunggulan</button>
+            <button onClick={() => scrollToSection('kemitraan')} className="hover:text-coffee-brown transition-colors cursor-pointer">Peluang Kemitraan</button>
+            <button onClick={() => scrollToSection('faq')} className="hover:text-coffee-brown transition-colors cursor-pointer">FAQ</button>
           </nav>
 
           {/* Action CTAs Desktop */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              id="nav-btn-cari"
-              onClick={onScrollToSearch}
-              className="px-4 py-2 text-xs font-bold text-coffee-brown bg-coffee-brown/10 hover:bg-coffee-brown/15 rounded-lg transition-colors cursor-pointer"
-            >
-              Cari Workspace
-            </button>
-            <button
-              id="nav-btn-mitra"
-              onClick={onOpenMitra}
-              className="px-4 py-2 text-xs font-bold text-white bg-coffee-brown hover:bg-coffee-dark rounded-lg transition-colors shadow-sm cursor-pointer"
-            >
-              Jadi Mitra
-            </button>
+            <button onClick={onScrollToSearch} className="px-4 py-2 text-xs font-bold text-coffee-brown bg-coffee-brown/10 hover:bg-coffee-brown/15 rounded-lg transition-colors cursor-pointer">Cari Workspace</button>
+            <button onClick={onOpenMitra} className="px-4 py-2 text-xs font-bold text-white bg-coffee-brown hover:bg-coffee-dark rounded-lg transition-colors shadow-sm cursor-pointer">Jadi Mitra</button>
           </div>
 
           {/* Mobile Menu Trigger */}
           <div className="flex md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-1 rounded-md text-dark-gray hover:text-coffee-brown focus:outline-none transition-colors"
-              aria-label="Toggle menu"
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className="p-1 rounded-md text-dark-gray hover:text-coffee-brown focus:outline-none transition-colors">
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Komunitas sudah dihapus di sini) */}
       {isOpen && (
         <div className="md:hidden bg-white border-b border-warm-beige/60 shadow-lg absolute top-full left-0 right-0 py-4 px-6 space-y-4 animate-fade-in">
           <div className="flex flex-col gap-3 text-sm font-semibold text-dark-gray/90">
-            <button
-              onClick={() => scrollToSection('cara-kerja')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <Compass className="w-4 h-4 text-coffee-light" /> Cara Kerja
-            </button>
-            <button
-              onClick={() => scrollToSection('cari-workspace')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <Briefcase className="w-4 h-4 text-coffee-light" /> Cari Workspace
-            </button>
-            <button
-              onClick={() => scrollToSection('mengapa-memilih')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <Users className="w-4 h-4 text-coffee-light" /> Keunggulan
-            </button>
-            <button
-              onClick={() => scrollToSection('kemitraan')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <Handshake className="w-4 h-4 text-coffee-light" /> Peluang Kemitraan
-            </button>
-            <button
-              onClick={() => scrollToSection('komunitas')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <Users className="w-4 h-4 text-coffee-light" /> Komunitas & Networking
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"
-            >
-              <HelpCircle className="w-4 h-4 text-coffee-light" /> FAQ
-            </button>
+            <button onClick={() => scrollToSection('cara-kerja')} className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"><Compass className="w-4 h-4 text-coffee-light" /> Cara Kerja</button>
+            <button onClick={() => scrollToSection('cari-workspace')} className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"><Briefcase className="w-4 h-4 text-coffee-light" /> Cari Workspace</button>
+            <button onClick={() => scrollToSection('mengapa-memilih')} className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"><Users className="w-4 h-4 text-coffee-light" /> Keunggulan</button>
+            <button onClick={() => scrollToSection('kemitraan')} className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"><Handshake className="w-4 h-4 text-coffee-light" /> Peluang Kemitraan</button>
+            <button onClick={() => scrollToSection('faq')} className="flex items-center gap-2.5 py-1.5 hover:text-coffee-brown transition-colors text-left"><HelpCircle className="w-4 h-4 text-coffee-light" /> FAQ</button>
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3 border-t border-warm-beige">
-            <button
-              id="nav-mobile-btn-cari"
-              onClick={() => {
-                setIsOpen(false);
-                onScrollToSearch();
-              }}
-              className="w-full text-center py-2 bg-coffee-brown/5 hover:bg-coffee-brown/10 text-coffee-brown text-xs font-bold rounded-lg transition-colors cursor-pointer"
-            >
-              Cari Workspace
-            </button>
-            <button
-              id="nav-mobile-btn-mitra"
-              onClick={() => {
-                setIsOpen(false);
-                onOpenMitra();
-              }}
-              className="w-full text-center py-2 bg-coffee-brown hover:bg-coffee-dark text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
-            >
-              Jadi Mitra
-            </button>
+            <button onClick={() => { setIsOpen(false); onScrollToSearch(); }} className="w-full text-center py-2 bg-coffee-brown/5 hover:bg-coffee-brown/10 text-coffee-brown text-xs font-bold rounded-lg transition-colors cursor-pointer">Cari Workspace</button>
+            <button onClick={() => { setIsOpen(false); onOpenMitra(); }} className="w-full text-center py-2 bg-coffee-brown hover:bg-coffee-dark text-white text-xs font-bold rounded-lg transition-colors cursor-pointer">Jadi Mitra</button>
           </div>
         </div>
       )}

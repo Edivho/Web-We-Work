@@ -5,7 +5,6 @@ import CaraKerja from './components/Landing Page/CaraKerja';
 import SearchWorkspace from './components/Landing Page/SearchWorkspace';
 import MengapaMemilih from './components/Landing Page/MengapaMemilih';
 import PeluangKemitraan from './components/Landing Page/PeluangKemitraan';
-import KomunitasNetworking from './components/Landing Page/KomunitasNetworking';
 import Testimoni from './components/Landing Page/Testimoni';
 import Statistik from './components/Landing Page/Statistik';
 import FAQComponent from './components/Landing Page/FAQComponent';
@@ -111,8 +110,6 @@ export default function App() {
         {/* 9. Statistik Section (Counters dashboard banner) */}
         <Statistik />
 
-        {/* 7. Komunitas & Networking Events Section */}
-        <KomunitasNetworking />
 
         {/* 8. Testimoni (Reviews client / hosts filter list) */}
         <Testimoni />
